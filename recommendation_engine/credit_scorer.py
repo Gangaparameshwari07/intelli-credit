@@ -1,7 +1,28 @@
 import json
 import re
 import google.generativeai as genai
-from config import GEMINI_API_KEY, GEMINI_MODEL, FIVE_CS_WEIGHTS
+import os
+try:
+    import streamlit as st
+    GEMINI_API_KEY = st.secrets.get("GEMINI_API_KEY", os.environ.get("GEMINI_API_KEY", ""))
+    GEMINI_MODEL = st.secrets.get("GEMINI_MODEL", "gemini-2.5-flash")
+    FIVE_CS_WEIGHTS = {
+        "character": 0.25,
+        "capacity": 0.30,
+        "capital": 0.20,
+        "collateral": 0.15,
+        "conditions": 0.10,
+    }
+except:
+    GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+    GEMINI_MODEL = "gemini-2.5-flash"
+    FIVE_CS_WEIGHTS = {
+        "character": 0.25,
+        "capacity": 0.30,
+        "capital": 0.20,
+        "collateral": 0.15,
+        "conditions": 0.10,
+    }
 from recommendation_engine.ml_model import predict_default
 
 genai.configure(api_key=GEMINI_API_KEY)

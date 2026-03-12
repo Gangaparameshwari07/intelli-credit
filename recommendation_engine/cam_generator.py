@@ -5,7 +5,8 @@ from datetime import datetime
 import os
 import json
 import re
-from config import OUTPUT_FOLDER
+
+OUTPUT_FOLDER = "outputs"
 
 
 def add_heading(doc: Document, text: str, level: int = 1):

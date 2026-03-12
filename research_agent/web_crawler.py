@@ -3,7 +3,16 @@ import json
 import re
 from tavily import TavilyClient
 import google.generativeai as genai
-from config import TAVILY_API_KEY, GEMINI_API_KEY, GEMINI_MODEL
+import os
+try:
+    import streamlit as st
+    TAVILY_API_KEY = st.secrets.get("TAVILY_API_KEY", os.environ.get("TAVILY_API_KEY", ""))
+    GEMINI_API_KEY = st.secrets.get("GEMINI_API_KEY", os.environ.get("GEMINI_API_KEY", ""))
+    GEMINI_MODEL = st.secrets.get("GEMINI_MODEL", "gemini-2.5-flash")
+except:
+    TAVILY_API_KEY = os.environ.get("TAVILY_API_KEY", "")
+    GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+    GEMINI_MODEL = "gemini-2.5-flash"
 
 tavily = TavilyClient(api_key=TAVILY_API_KEY)
 genai.configure(api_key=GEMINI_API_KEY)
