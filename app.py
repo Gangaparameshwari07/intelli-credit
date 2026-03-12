@@ -17,7 +17,6 @@ from research_agent.qualitative_portal import process_qualitative_notes
 from recommendation_engine.credit_scorer import compute_five_cs, make_decision, explain_decision, natural_language_explainer
 from recommendation_engine.cam_generator import generate_cam
 import google.generativeai as genai
-from config import GEMINI_API_KEY, GEMINI_MODEL
 import re
 
 genai.configure(api_key=GEMINI_API_KEY)
