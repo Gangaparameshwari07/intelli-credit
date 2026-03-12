@@ -1,0 +1,15 @@
+google-generativeai
+tavily-python
+pymupdf
+pytesseract
+pandas
+python-docx
+streamlit
+shap
+lightgbm
+pillow
+python-dotenv
+pdfplumber>=0.10.0
+openpyxl>=3.1.0
+xlrd>=2.0.1
+Pillow>=10.0.0
