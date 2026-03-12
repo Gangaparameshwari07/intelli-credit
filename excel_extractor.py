@@ -14,7 +14,14 @@ import openpyxl
 import re
 import json
 import google.generativeai as genai
-from config import GEMINI_API_KEY, GEMINI_MODEL
+import os
+try:
+    import streamlit as st
+    GEMINI_API_KEY = st.secrets.get("GEMINI_API_KEY", os.environ.get("GEMINI_API_KEY", ""))
+    GEMINI_MODEL = "gemini-2.5-flash"
+except:
+    GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+    GEMINI_MODEL = "gemini-2.5-flash"
 
 genai.configure(api_key=GEMINI_API_KEY)
 
