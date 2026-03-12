@@ -100,7 +100,7 @@ def make_decision(weighted_score: float, financial_data: dict, ml_score: float =
     if financial_data.get("debt_to_equity", 0) > 3:
         weighted_score = min(weighted_score, 64)
 
-    if weighted_score >= 65:
+    if weighted_score >= 80:
         decision = "APPROVE"
         requested = financial_data.get("loan_amount_requested", 1000000)
         limit = requested * min(1.0, weighted_score / 100)
