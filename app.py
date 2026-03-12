@@ -19,6 +19,16 @@ from recommendation_engine.cam_generator import generate_cam
 import google.generativeai as genai
 import re
 
+import os
+try:
+    GEMINI_API_KEY = st.secrets.get("GEMINI_API_KEY", os.environ.get("GEMINI_API_KEY", ""))
+    TAVILY_API_KEY = st.secrets.get("TAVILY_API_KEY", os.environ.get("TAVILY_API_KEY", ""))
+    GEMINI_MODEL = "gemini-2.5-flash"
+except:
+    GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+    TAVILY_API_KEY = os.environ.get("TAVILY_API_KEY", "")
+    GEMINI_MODEL = "gemini-2.5-flash"
+
 genai.configure(api_key=GEMINI_API_KEY)
 
 st.set_page_config(page_title="Intelli-Credit Engine", page_icon="🏦", layout="wide", initial_sidebar_state="collapsed")
