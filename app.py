@@ -421,7 +421,7 @@ elif s==4:
             quota_warnings.append("secondary_research")
             research={"company":company_name,"sources":[],"analysis":'{"overall_risk":"high","overall_external_risk_rating":"High — manual verification required","risk_justification":"Secondary research failed. Please check Gemini API quota."}'}
         prog.progress(55)
-        time.sleep(3)  # Rate limiting - space out API calls
+        time.sleep(15)  # Rate limiting - space out API calls
 
         stat.info("⚖️ MCA filings, eCourts, regulatory actions...")
         try:
@@ -433,7 +433,7 @@ elif s==4:
             quota_warnings.append("mca")
             mca_result={"status":"mock","findings":"Mock API Gateway active — production integrates with mca.gov.in REST API and eCourts India.","sources":[]}
         prog.progress(68)
-        time.sleep(3)  # Rate limiting - space out API calls
+        time.sleep(15)  # Rate limiting - space out API calls
 
         gst_analysis={"gst_revenue":0,"bank_credits":0,"discrepancy_pct":0,"flags":[],"risk_level":"low"}
         prog.progress(75)
@@ -452,7 +452,7 @@ elif s==4:
         except: explanation=f"Decision: {decision['decision']} — Score: {decision['score']}/100."
         try: nl_explanation=natural_language_explainer(decision,five_cs_result["five_cs"],gst_analysis,five_cs_result.get("ml_result",{}),financial_data)
         except: nl_explanation=explanation
-        time.sleep(3)  # Rate limiting - space out API calls
+        time.sleep(15)  # Rate limiting - space out API calls
 
         stat.info("📊 Generating SWOT analysis...")
         swot_text, swot_model, swot_err = safe_gemini(

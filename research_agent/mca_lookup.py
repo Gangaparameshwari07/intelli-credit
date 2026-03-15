@@ -63,6 +63,7 @@ Research:
 Write in clear professional paragraphs. Be specific about findings."""
 
     try:
+        time.sleep(12)  # Rate limiting before Gemini call
         model = genai.GenerativeModel(GEMINI_MODEL)
         response = model.generate_content(prompt)
         findings = response.text

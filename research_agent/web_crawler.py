@@ -98,6 +98,7 @@ Research Data:
 Return ONLY the JSON object. No extra text."""
 
     try:
+        time.sleep(12)  # Rate limiting before Gemini call
         model = genai.GenerativeModel(GEMINI_MODEL)
         response = model.generate_content(prompt)
         clean = re.sub(r"```json|```", "", response.text).strip()
