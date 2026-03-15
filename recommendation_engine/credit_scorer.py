@@ -34,6 +34,13 @@ def compute_five_cs(financial_data: dict, gst_analysis: dict, research_analysis:
     ml_result = predict_default(financial_data)
     ml_score = ml_result["ml_score"]
 
+    # Realistic bounds — synthetic model can be overconfident
+    raw_default = ml_result.get("default_probability", 15.0)
+    raw_default = max(8.0, min(75.0, raw_default))
+    ml_score = round(100 - raw_default, 2)
+    ml_result["ml_score"] = ml_score
+    ml_result["default_probability"] = raw_default
+
     overall_risk = "medium"
     if isinstance(research_analysis, dict):
         overall_risk = research_analysis.get("overall_external_risk_rating",
