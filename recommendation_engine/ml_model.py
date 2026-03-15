@@ -135,8 +135,9 @@ def predict_default(financial_data: dict) -> dict:
         }])
 
         prob = model.predict_proba(input_df)[0]
-        default_prob = round(prob[1] * 100, 2)
-        ml_score = round((1 - prob[1]) * 100, 2)
+        # Realistic floor/ceiling — synthetic model can be overconfident
+        default_prob = max(8.0, min(80.0, round(prob[1] * 100, 2)))
+        ml_score = round(100 - default_prob, 2)
 
         try:
             explainer = shap.TreeExplainer(model)
